@@ -4,6 +4,7 @@ import Home from './pages/Home.vue'
 import About from './pages/About.vue'
 import Classified from './pages/Classified.vue'
 import Login from './pages/Login.vue'
+import SignUp from './pages/SignUp.vue'
 import NotFound from './pages/404.vue'
 
 
@@ -15,6 +16,7 @@ const routes = [
         return isAuthenticated.value ? true : '/login'
     }},
     {path:'/login', component: Login,},
+    {path:'/signup', component: SignUp,},
     {path: '/:patchMatch(.*)*', name: 'NotFound', component: NotFound}
 
 

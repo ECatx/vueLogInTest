@@ -1,8 +1,8 @@
 <template >
 <div data-theme="dark" class="container flex flex-col max-w-md p-6 mx-auto rounded-md sm:p-10 bg-base-100 text-primary-content">
 	<div  class="mb-8 text-center">
-		<h1 class="my-3 text-4xl font-bold">Sign in</h1>
-		<p class="text-sm  text-base-content">Sign in to access your account</p>
+		<h1 class="my-3 text-4xl font-bold">Create Account</h1>
+		<p class="text-sm  text-base-content">Enter email and password to create new account</p>
 	</div>
 	<form @submit.prevent novalidate="" action="" class="space-y-12 ng-untouched ng-pristine ng-valid">
 		<div class="space-y-4">
@@ -13,14 +13,13 @@
 			<div>
 				<div class="flex justify-between mb-2">
 					<label for="password" class="text-sm">Password</label>
-					<a href="#" class="text-xs hover:underline  text-coolGray-400">Forgot password?</a>
 				</div>
 				<input type="password" name="password" id="password" placeholder="*****" class="w-full px-3 py-2 border rounded-md  border-coolGray-700  bg-neutral-focus text-coolGray-100" v-model="password">
 			</div>
 		</div>
 		<div class="space-y-2">
 			<div>
-				<button type="button" @click="login" class="w-full px-8 py-3 rounded-md bg-primary-focus text-primary-content hover:bg-primary">Sign in</button>
+				<button type="button" @click="login" class="w-full px-8 py-3 rounded-md bg-primary-focus text-primary-content hover:bg-primary">Sign up</button>
 			</div>
 		</div>
 	</form>
@@ -29,12 +28,12 @@
 
 <script setup>
 import {ref} from 'vue'
-import {isAuthenticated,signIn} from '../helpers/userAuth'
+import {isAuthenticated,signUp} from '../helpers/userAuth'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const login = async () => {
 	try {
-		await signIn(email.value,password.value)
+		await signUp(email.value,password.value)
 		router.push('/')	
 	} catch (error) {
 		console.log(error)

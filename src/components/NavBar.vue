@@ -17,6 +17,9 @@
       <router-link v-if="!isAuthenticated" to="Login" class="btn btn-ghost btn-sm rounded-btn">
               Login
             </router-link>
+            <router-link v-if="!isAuthenticated" to="SignUp" class="btn btn-ghost btn-sm rounded-btn">
+              Signup
+            </router-link>
             <div v-else>
                     <router-link to="Classified" class="btn btn-ghost btn-sm rounded-btn">
               Classified
@@ -31,12 +34,12 @@
 </template>
 
 <script setup>
-import {isAuthenticated} from '../helpers/userAuth.js'
+import {isAuthenticated,signOut} from '../helpers/userAuth.js'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 
-const logout = () => {
-  isAuthenticated.value = false
+const logout =  async () => {
+  await signOut()
   router.push('/')
 
 }
