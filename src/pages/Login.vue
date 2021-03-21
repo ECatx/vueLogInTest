@@ -22,6 +22,9 @@
 			<div>
 				<button type="button" @click="login" class="w-full px-8 py-3 rounded-md bg-primary-focus text-primary-content hover:bg-primary">Sign in</button>
 			</div>
+			<div>
+				<button type="button" @click="google" class="w-full px-8 py-3 rounded-md bg-error text-primary-content hover:bg-primary">Sign in with Google<img class="w-8 mr-4" src="../assets/g-logo.png"/></button>
+			</div>
 		</div>
 	</form>
 </div>
@@ -29,12 +32,20 @@
 
 <script setup>
 import {ref} from 'vue'
-import {isAuthenticated,signIn} from '../helpers/userAuth'
+import {isAuthenticated,signIn,googlePopUp} from '../helpers/userAuth'
 import {useRouter} from 'vue-router'
 const router = useRouter()
 const login = async () => {
 	try {
 		await signIn(email.value,password.value)
+		router.push('/')	
+	} catch (error) {
+		console.log(error)
+	}
+}
+const google = async () => {
+	try {
+		await googlePopUp()
 		router.push('/')	
 	} catch (error) {
 		console.log(error)
