@@ -23,9 +23,9 @@
 			<div>
 				<button type="button" @click="login" class="w-full px-8 py-3 rounded-md bg-primary-focus text-primary-content hover:bg-primary">Sign in</button>
 			</div>
-			<div>
-				<button type="button" @click="google" class="w-full px-8 py-3 rounded-md bg-error text-primary-content hover:bg-primary">Sign in with Google<img class="w-8 mr-4" src="../assets/g-logo.png"/></button>
-			</div>
+
+				<button type="button" @click="google" class="w-full flex text-center mt-8 px-8 py-3 rounded-md bg-error text-primary-content hover:bg-primary"><img class="w-8 mr-12 text-center" src="../assets/g-logo.png"/>Sign in with google</button>
+
 		</div>
 	</form>
 </div>
