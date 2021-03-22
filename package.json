@@ -10,8 +10,10 @@
     "@vueuse/firebase": "^4.4.1",
     "daisyui": "^0.13.3",
     "firebase": "^8.3.0",
+    "vee-validate": "^4.2.2",
     "vue": "^3.0.5",
-    "vue-router": "^4.0.4"
+    "vue-router": "^4.0.4",
+    "yup": "^0.32.9"
   },
   "devDependencies": {
     "@vitejs/plugin-vue": "^1.1.4",

@@ -10,13 +10,14 @@
 				<label for="email" class="block mb-2 text-sm">Email address</label>
 				<input type="email" name="email" id="email" placeholder="enter email address" class="w-full px-3 py-2 border rounded-md border-coolGray-700 bg-neutral-focus  text-coolGray-100" v-model="email">
 			</div>
+				<p class="capitalize text-sm text-left text-red-500">{{errorEmail}}</p>
 			<div>
 				<div class="flex justify-between mb-2">
 					<label for="password" class="text-sm">Password</label>
-					<a href="#" class="text-xs hover:underline  text-coolGray-400">Forgot password?</a>
 				</div>
 				<input type="password" name="password" id="password" placeholder="*****" class="w-full px-3 py-2 border rounded-md  border-coolGray-700  bg-neutral-focus text-coolGray-100" v-model="password">
 			</div>
+				<p class="capitalize text-sm text-left text-red-500">{{errorPassword}}</p>
 		</div>
 		<div class="space-y-2">
 			<div>
@@ -34,23 +35,42 @@
 import {ref} from 'vue'
 import {isAuthenticated,signIn,googlePopUp} from '../helpers/userAuth'
 import {useRouter} from 'vue-router'
+import { useField, useValidateField, validate } from 'vee-validate'
+import * as yup from 'yup'
+import {isError,msg} from '../helpers/userError'
 const router = useRouter()
 const login = async () => {
 	try {
-		await signIn(email.value,password.value)
-		router.push('/')	
+		if(emailMeta.valid && passwordMeta.valid){
+			await signIn(email.value,password.value)
+			isError.value = false
+			router.push('/')
+		} else {
+			isError.value = true
+			msg.value = 'Invalid values enetered'
+		}
+	
 	} catch (error) {
+		isError.value = true
+		msg.value = 'Authentication error'
 		console.log(error)
 	}
 }
 const google = async () => {
 	try {
 		await googlePopUp()
+		isError.value = false
 		router.push('/')	
 	} catch (error) {
+		isError.value = true
+		msg.value = 'Authentication error'
 		console.log(error)
 	}
 }
-const email = ref('')
-const password = ref('')
+
+//const email = ref('')
+//const password = ref('')
+const {value: email,errorMessage: errorEmail,meta: emailMeta} = useField('email', yup.string().required().email())
+const {value: password,errorMessage: errorPassword,meta: passwordMeta} = useField('password',yup.string().required().min(8))
+
 </script>
